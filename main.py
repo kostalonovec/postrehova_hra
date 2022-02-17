@@ -33,9 +33,8 @@ def cast_hry():
     lze_ukazovat = True
     zahajeni = True
     music.play_melody("C", 120)
-    basic.show_icon(IconNames.HEART)
     while zahajeni == True:
-        basic.show_icon(IconNames.HEART)
+        basic.show_icon(IconNames.YES)
 
 forever(cast_hry)
 
@@ -44,36 +43,37 @@ def vyhodnocovani():
     global zahajeni, hrac1, hrac2, lze_ukazovat
 
     if zahajeni == True and hrac1 == True:
-        restart()
         basic.show_string("1")
+        restart()
 
     elif zahajeni == True and hrac2 == True:
-        restart()
         basic.show_string("2")
+        restart()
 
     elif zahajeni == True and hrac1 == True and hrac2 == True:
-        restart()
         basic.show_string("R")
+        restart()
 
     elif zahajeni == False and hrac1 == True and lze_ukazovat == True:
-        restart()
         basic.show_string("B")
+        restart()
 
     elif zahajeni == False and hrac2 ==  True and lze_ukazovat == True:
-        restart()
         basic.show_string("A")
+        restart()
 
     elif zahajeni == False and hrac1 == True and hrac2 == True and lze_ukazovat == True:
-        restart()
         basic.show_string("C")
+        restart()
 
 forever(vyhodnocovani)
 
 def restart():
 
-    global hrac1, hrac2, zahajeni
-    
-    basic.clear_screen()
+    global hrac1, hrac2, zahajeni, lze_ukazovat
+
+    zahajeni = False
     hrac1 = False
     hrac2 = False
-    zahajeni = False
+    lze_ukazovat = False
+    basic.clear_screen()

@@ -22,39 +22,39 @@ forever(function cast_hry() {
     let lze_ukazovat = true
     zahajeni = true
     music.playMelody("C", 120)
-    basic.showIcon(IconNames.Heart)
     while (zahajeni == true) {
-        basic.showIcon(IconNames.Heart)
+        basic.showIcon(IconNames.Yes)
     }
 })
 forever(function vyhodnocovani() {
     
     if (zahajeni == true && hrac1 == true) {
-        restart()
         basic.showString("1")
+        restart()
     } else if (zahajeni == true && hrac2 == true) {
-        restart()
         basic.showString("2")
+        restart()
     } else if (zahajeni == true && hrac1 == true && hrac2 == true) {
-        restart()
         basic.showString("R")
+        restart()
     } else if (zahajeni == false && hrac1 == true && lze_ukazovat == true) {
-        restart()
         basic.showString("B")
+        restart()
     } else if (zahajeni == false && hrac2 == true && lze_ukazovat == true) {
-        restart()
         basic.showString("A")
-    } else if (zahajeni == false && hrac1 == true && hrac2 == true && lze_ukazovat == true) {
         restart()
+    } else if (zahajeni == false && hrac1 == true && hrac2 == true && lze_ukazovat == true) {
         basic.showString("C")
+        restart()
     }
     
 })
 function restart() {
     
-    basic.clearScreen()
+    zahajeni = false
     hrac1 = false
     hrac2 = false
-    zahajeni = false
+    lze_ukazovat = false
+    basic.clearScreen()
 }
 
