@@ -6,6 +6,8 @@ let hrac1 = false
 let hrac2 = false
 let zahajeni = false
 let lze_ukazovat = false
+let podvod1 = false
+let podvod2 = false
 input.onPinPressed(TouchPin.P1, function on_pin_pressed_p1() {
     
     hrac1 = true
@@ -24,18 +26,22 @@ forever(function cast_hry() {
     while (zahajeni == true && hrac1 == false && hrac2 == false) {
         basic.showIcon(IconNames.Yes)
     }
+    pause(3000)
 })
 forever(function vyhodnocovani() {
     
-    console.logValue("x", lze_ukazovat)
-    if (zahajeni == false && hrac1 == true && lze_ukazovat == true) {
+    if (zahajeni == false && hrac1 == true) {
+        podvod1 = true
+    } else if (zahajeni == false && hrac2 == true) {
+        podvod2 = true
+    } else if (zahajeni == true && podvod1 == true && podvod2 == true) {
+        basic.showString("C")
+        restart()
+    } else if (zahajeni == true && podvod1 == true) {
         basic.showString("B")
         restart()
-    } else if (zahajeni == false && hrac2 == true && lze_ukazovat == true) {
+    } else if (zahajeni == true && podvod2 == true) {
         basic.showString("A")
-        restart()
-    } else if (zahajeni == false && hrac1 == true && hrac2 == true && lze_ukazovat == true) {
-        basic.showString("C")
         restart()
     } else if (zahajeni == true && hrac1 == true) {
         basic.showString("1")
@@ -54,8 +60,8 @@ function restart() {
     zahajeni = false
     hrac1 = false
     hrac2 = false
-    lze_ukazovat = false
+    podvod1 = false
+    podvod2 = false
     basic.clearScreen()
-    pause(3000)
 }
 

@@ -8,6 +8,8 @@ hrac1 = False
 hrac2 = False
 zahajeni = False
 lze_ukazovat = False
+podvod1 = False
+podvod2 = False
 
 def on_pin_pressed_p1():
 
@@ -35,24 +37,31 @@ def cast_hry():
 
     while zahajeni == True and hrac1 == False and hrac2 == False:
         basic.show_icon(IconNames.YES)
+    pause(3000)
 
 forever(cast_hry)
 
 def vyhodnocovani():
 
-    global zahajeni, hrac1, hrac2, lze_ukazovat
-    console.log_value("x", lze_ukazovat)
+    global zahajeni, hrac1, hrac2, podvod1, podvod2
     
-    if zahajeni == False and hrac1 == True and lze_ukazovat == True:
+    if zahajeni == False and hrac1 == True:
+        podvod1 = True
+    
+    elif zahajeni == False and hrac2 ==  True:
+            podvod2 = True
+
+
+    elif zahajeni == True and podvod1 == True and podvod2 == True:
+        basic.show_string("C")
+        restart()
+
+    elif zahajeni == True and podvod1 == True:
         basic.show_string("B")
         restart()
 
-    elif zahajeni == False and hrac2 ==  True and lze_ukazovat == True:
+    elif zahajeni == True and podvod2 == True:
         basic.show_string("A")
-        restart()
-
-    elif zahajeni == False and hrac1 == True and hrac2 == True and lze_ukazovat == True:
-        basic.show_string("C")
         restart()
 
     elif zahajeni == True and hrac1 == True:
@@ -71,11 +80,11 @@ forever(vyhodnocovani)
 
 def restart():
 
-    global hrac1, hrac2, zahajeni, lze_ukazovat
+    global hrac1, hrac2, zahajeni, podvod1, podvod2
 
     zahajeni = False
     hrac1 = False
     hrac2 = False
-    lze_ukazovat = False
+    podvod1 = False
+    podvod2 = False
     basic.clear_screen()
-    pause(3000)
