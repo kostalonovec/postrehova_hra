@@ -25,15 +25,15 @@ input.on_pin_pressed(TouchPin.P2, on_pin_pressed_p2)
 
 def cast_hry():
 
-    global zahajeni, hrac1, hrac2
+    global zahajeni, hrac1, hrac2, lze_ukazovat
 
-    console.log_value("x", zahajeni)
     basic.clear_screen()
     basic.pause(randint(3000, 10000))
     lze_ukazovat = True
     zahajeni = True
     music.play_melody("C", 120)
-    while zahajeni == True:
+
+    while zahajeni == True and hrac1 == False and hrac2 == False:
         basic.show_icon(IconNames.YES)
 
 forever(cast_hry)
@@ -41,20 +41,9 @@ forever(cast_hry)
 def vyhodnocovani():
 
     global zahajeni, hrac1, hrac2, lze_ukazovat
-
-    if zahajeni == True and hrac1 == True:
-        basic.show_string("1")
-        restart()
-
-    elif zahajeni == True and hrac2 == True:
-        basic.show_string("2")
-        restart()
-
-    elif zahajeni == True and hrac1 == True and hrac2 == True:
-        basic.show_string("R")
-        restart()
-
-    elif zahajeni == False and hrac1 == True and lze_ukazovat == True:
+    console.log_value("x", lze_ukazovat)
+    
+    if zahajeni == False and hrac1 == True and lze_ukazovat == True:
         basic.show_string("B")
         restart()
 
@@ -64,6 +53,18 @@ def vyhodnocovani():
 
     elif zahajeni == False and hrac1 == True and hrac2 == True and lze_ukazovat == True:
         basic.show_string("C")
+        restart()
+
+    elif zahajeni == True and hrac1 == True:
+        basic.show_string("1")
+        restart()
+
+    elif zahajeni == True and hrac2 == True:
+        basic.show_string("2")
+        restart()
+
+    elif zahajeni == True and hrac1 == True and hrac2 == True:
+        basic.show_string("R")
         restart()
 
 forever(vyhodnocovani)
@@ -77,3 +78,4 @@ def restart():
     hrac2 = False
     lze_ukazovat = False
     basic.clear_screen()
+    pause(3000)
